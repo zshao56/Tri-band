@@ -1,0 +1,13 @@
+prefix=d:/OneDrive - UW-Madison/git/Tri-band/.conda/Library
+exec_prefix=d:/OneDrive - UW-Madison/git/Tri-band/.conda/Library
+libdir=d:/OneDrive - UW-Madison/git/Tri-band/.conda/Library/lib
+sharedlibdir=d:/OneDrive - UW-Madison/git/Tri-band/.conda/Library/lib
+includedir=d:/OneDrive - UW-Madison/git/Tri-band/.conda/Library/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.13
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}
