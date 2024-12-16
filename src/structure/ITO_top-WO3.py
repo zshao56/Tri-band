@@ -2,15 +2,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 import tidy3d as td
 import tidy3d.web as web
+from util import data_path
 def initialize_variables():
     global medium_WO3_Bleach, medium_WO3_Color, medium_ITO_Top, \
         medium_ITO_Bottom, medium_SPE, inf_eff, wl_start, wl_end, \
             freq_start, freq_end, freqs, freq0, freqw
-    medium_WO3_Bleach = td.PoleResidue.from_file("nk/WO3-bleach-modified.json")
-    medium_WO3_Color = td.PoleResidue.from_file("nk/WO3-coloration-modified.json")
-    medium_ITO_Top = td.PoleResidue.from_file("nk/ITO-BaF2.json")
-    medium_ITO_Bottom = td.PoleResidue.from_file("nk/ITO-glass.json")
-    medium_SPE = td.PoleResidue.from_file("nk/SPE.json")
+    medium_WO3_Bleach = td.PoleResidue.from_file(data_path("nk/WO3-bleach-modified.json"))
+    medium_WO3_Color = td.PoleResidue.from_file(data_path("nk/WO3-coloration-modified.json"))
+    medium_ITO_Top = td.PoleResidue.from_file(data_path("nk/ITO-BaF2.json"))
+    medium_ITO_Bottom = td.PoleResidue.from_file(data_path("nk/ITO-glass.json"))
+    medium_SPE = td.PoleResidue.from_file(data_path("nk/SPE.json"))
     inf_eff = 10
     wl_start = 0.4
     wl_end = 18
@@ -115,8 +116,8 @@ def sim_plot(sim, folder_name):
     sim.plot_grid(z=0, ax=ax[1], lw=0.4, colors="r")
     ax[1].set_xlim(-0.6, 0.6)
     ax[1].set_ylim(-0.4, 0.4)
-    plt.savefig(f'{folder_name}/grid_sim_structure_wwo3{w_WO3}_tSPE{t_SPE}3.png')
-
+    plt.savefig(data_path(f'{folder_name}/grid_sim_structure_wwo3{w_WO3}_tSPE{t_SPE}3.png'))
+    plt.close() 
 
 
 def plot_combined_results(sim_data_B, sim_data_C, w_WO3, t_SPE, folder_name):
@@ -145,13 +146,13 @@ def plot_combined_results(sim_data_B, sim_data_C, w_WO3, t_SPE, folder_name):
     plt.legend()
     plt.title(f"Comparison of Optical Properties\nwWO3 = {w_WO3}_tSPE = {t_SPE}")
     plt.grid(True)
-    plt.savefig(f"{folder_name}/results_wwo3{w_WO3}_tSPE{t_SPE}3.png")
+    plt.savefig(data_path(f"{folder_name}/results_wwo3{w_WO3}_tSPE{t_SPE}3.png"))
     plt.close() 
 
 
 
 
-    output_file = f"{folder_name}/results_wwo3{w_WO3}_tSPE{t_SPE}3.txt"
+    output_file = data_path(f"{folder_name}/results_wwo3{w_WO3}_tSPE{t_SPE}3.txt")
     with open(output_file, "w", encoding="utf-8") as f:
         f.write("Wavelength (μm), R (B), T (B), A (B), R (C), T (C), A (C)\n")
         for wl, r_L, t_L, a_L, r_H, t_H, a_H in zip(td.C_0 / freqs, R_B, T_B, A_B, R_C, T_C,
