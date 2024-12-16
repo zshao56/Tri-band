@@ -5,12 +5,12 @@
 /assets/*.png
 
 # Large files best kept out of source control
-/results
+/data/results
 *.png
 *.txt
 
 
-/nk
+/data/nk
 *.jpg
 *.csv
 *.json
